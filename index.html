@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pebble Street Giveaway</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&family=Titillium+Web:wght@600;700;900&display=swap');
 
         :root {
-            --accent1: #667eea;
-            --accent2: #764ba2;
-            --pink1: #f093fb;
-            --pink2: #f5576c;
-            --blue1: #56ccf2;
-            --blue2: #2f80ed;
-            --green: #4ade80;
+            /* F1 broadcast palette */
+            --accent1: #ff1801;   /* F1 red — hero accent */
+            --accent2: #c40812;   /* deep red */
+            --pink1: #ff6a3d;     /* warm red-orange highlight */
+            --pink2: #ff1801;
+            --blue1: #22d3ee;     /* cyan — data / tech accent */
+            --blue2: #0891b2;
+            --green: #39e079;     /* DRS / positive */
+            --gold: #ffcf33;      /* winners only */
+            --ink: #f4f5f7;
+            --font-display: 'Titillium Web', 'Inter', sans-serif;
         }
 
         * {
@@ -25,9 +29,13 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #151932 50%, #0a0e27 100%);
+            /* carbon-fibre weave over a deep ink base */
+            background:
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.016) 0 1px, transparent 1px 5px),
+                repeating-linear-gradient(-45deg, rgba(255,255,255,0.016) 0 1px, transparent 1px 5px),
+                linear-gradient(135deg, #0a0a0d 0%, #121016 55%, #08080b 100%);
             background-attachment: fixed;
-            color: #ffffff;
+            color: var(--ink);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -38,11 +46,11 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background:
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 50% 100%, rgba(119, 198, 255, 0.3) 0%, transparent 50%);
+                radial-gradient(circle at 12% -5%, rgba(255, 24, 1, 0.18) 0%, transparent 42%),
+                radial-gradient(circle at 88% 8%, rgba(255, 24, 1, 0.11) 0%, transparent 45%),
+                radial-gradient(circle at 50% 118%, rgba(34, 211, 238, 0.10) 0%, transparent 50%);
             pointer-events: none;
-            opacity: 0.4;
+            opacity: 0.9;
         }
 
         /* Animated ambient particle field behind everything */
@@ -56,9 +64,10 @@
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.035);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 24, 1, 0.32);
+            box-shadow: 0 3px 30px rgba(255, 24, 1, 0.14);
             padding: 26px 25px 22px;
             position: relative;
             z-index: 10;
@@ -99,25 +108,29 @@
             align-items: center;
             justify-content: center;
             font-size: 46px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 24, 1, 0.35);
         }
 
         h1 {
-            font-size: 2.7em;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent1) 0%, var(--pink1) 100%);
+            font-family: var(--font-display);
+            font-size: 3em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: linear-gradient(115deg, #ff6a3d 0%, #ff1801 55%, #ff3b2f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
             text-align: center;
-            line-height: 1.1;
+            line-height: 1.04;
+            filter: drop-shadow(0 2px 14px rgba(255, 24, 1, 0.3));
         }
 
         .subtitle {
             font-family: 'Space Mono', monospace;
-            font-size: 0.95em;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            color: rgba(244, 245, 247, 0.55);
             text-align: center;
         }
 
@@ -200,31 +213,33 @@
             white-space: nowrap;
         }
 
-        .file-input-label {
-            background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        .file-input-label, .logo-input-label {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: none;
         }
-        .file-input-label:hover { transform: translateY(-2px); box-shadow: 0 7px 25px rgba(102, 126, 234, 0.5); }
-
-        .logo-input-label {
-            background: linear-gradient(135deg, var(--pink1) 0%, var(--pink2) 100%);
-            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+        .file-input-label:hover, .logo-input-label:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 24, 1, 0.55);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
         }
-        .logo-input-label:hover { box-shadow: 0 7px 25px rgba(240, 147, 251, 0.5); }
 
         .btn-paste {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
         }
-        .btn-paste:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-2px); }
+        .btn-paste:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 24, 1, 0.55); transform: translateY(-2px); }
 
         .btn-start {
-            background: linear-gradient(135deg, var(--blue1) 0%, var(--blue2) 100%);
-            box-shadow: 0 4px 15px rgba(47, 128, 237, 0.4);
+            background: linear-gradient(135deg, #ff2d1a 0%, #c40812 100%);
+            box-shadow: 0 4px 18px rgba(255, 24, 1, 0.45);
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .btn-start:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 7px 25px rgba(47, 128, 237, 0.5); }
+        .btn-start:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 24, 1, 0.62); }
 
         .btn-ghost {
             background: rgba(255,255,255,0.05);
@@ -360,15 +375,17 @@
         }
         .leaderboard::-webkit-scrollbar { width: 8px; }
         .leaderboard::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
-        .leaderboard::-webkit-scrollbar-thumb { background: rgba(102, 126, 234, 0.5); border-radius: 4px; }
-        .leaderboard::-webkit-scrollbar-thumb:hover { background: rgba(102, 126, 234, 0.7); }
+        .leaderboard::-webkit-scrollbar-thumb { background: rgba(255, 24, 1, 0.5); border-radius: 4px; }
+        .leaderboard::-webkit-scrollbar-thumb:hover { background: rgba(255, 24, 1, 0.7); }
 
         .leaderboard h2 {
-            font-size: 1.7em;
+            font-family: var(--font-display);
+            font-size: 1.75em;
             margin-bottom: 16px;
             text-align: center;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             background: linear-gradient(135deg, var(--pink1) 0%, var(--pink2) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -468,13 +485,14 @@
             flex-wrap: wrap;
         }
         .race-status {
-            font-size: 1.3em; color: var(--blue1); font-weight: 700;
+            font-family: var(--font-display);
+            font-size: 1.35em; color: var(--ink); font-weight: 900;
             text-transform: uppercase; letter-spacing: 1px;
             display: flex; align-items: center; gap: 10px;
         }
         .race-status::before {
             content: ''; width: 12px; height: 12px; border-radius: 50%;
-            background: var(--blue1); box-shadow: 0 0 12px var(--blue1);
+            background: var(--accent1); box-shadow: 0 0 14px var(--accent1);
             animation: pulse 1.2s infinite;
         }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -495,22 +513,24 @@
         .lap-hud {
             position: absolute; top: 18px; left: 18px; z-index: 3;
             pointer-events: none;
-            background: rgba(10,14,30,0.72);
+            background: rgba(8,8,12,0.78);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.14);
-            border-radius: 14px;
-            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-top: 3px solid var(--accent1);
+            border-radius: 4px 4px 12px 12px;
+            padding: 9px 18px 10px;
             display: flex; flex-direction: column; gap: 2px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
         .lap-hud .lap-label {
-            font-family: 'Space Mono', monospace; font-size: 0.68em;
-            letter-spacing: 3px; color: rgba(255,255,255,0.5); text-transform: uppercase;
+            font-family: var(--font-display); font-size: 0.72em; font-weight: 700;
+            letter-spacing: 4px; color: rgba(255,255,255,0.5); text-transform: uppercase;
         }
         .lap-hud .lap-num {
             font-family: 'Space Mono', monospace; font-weight: 700;
             font-size: 2em; line-height: 1; color: #fff;
         }
-        .lap-hud .lap-num b { color: var(--green); }
+        .lap-hud .lap-num b { color: var(--accent1); }
 
         /* ---------- Winner modal ---------- */
         .overlay {
@@ -550,10 +570,12 @@
         .winner-announcement.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 
         .winner-announcement h2 {
-            font-size: 2.8em;
+            font-family: var(--font-display);
+            font-size: 3em;
             margin-bottom: 8px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -868,10 +890,10 @@
         const LEADERBOARD_MAX = 80;
 
         const COLORS = [
-            '#667eea', '#f093fb', '#56ccf2', '#4ade80', '#fbbf24',
-            '#f87171', '#a78bfa', '#34d399', '#60a5fa', '#f472b6',
-            '#fde047', '#c084fc', '#5eead4', '#fb923c', '#94a3b8',
-            '#e879f9', '#86efac', '#7dd3fc', '#fca5a5', '#bfdbfe'
+            '#ff1801', '#22d3ee', '#39e079', '#ffcf33', '#a855f7',
+            '#ff6a3d', '#38bdf8', '#f43f5e', '#2dd4bf', '#c084fc',
+            '#fb923c', '#4ade80', '#60a5fa', '#f472b6', '#eab308',
+            '#fca5a5', '#34d399', '#818cf8', '#e879f9', '#93c5fd'
         ];
 
         // Canvas logical size (CSS pixels); backing store scaled for retina.
@@ -1120,11 +1142,11 @@
 
             draw() {
                 // base + soft centre light
-                ctx.fillStyle = '#0b0f1e';
+                ctx.fillStyle = '#0a0a0e';
                 ctx.fillRect(0, 0, W, H);
                 const rg = ctx.createRadialGradient(W / 2, H * 0.46, 0, W / 2, H * 0.46, Math.max(W, H) * 0.62);
-                rg.addColorStop(0, 'rgba(70, 80, 140, 0.20)');
-                rg.addColorStop(1, 'rgba(10, 12, 26, 0)');
+                rg.addColorStop(0, 'rgba(150, 45, 38, 0.16)');
+                rg.addColorStop(1, 'rgba(10, 10, 14, 0)');
                 ctx.fillStyle = rg;
                 ctx.fillRect(0, 0, W, H);
 
@@ -1142,19 +1164,19 @@
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
 
-                // outer neon glow rail
+                // outer red glow rail
                 ctx.save();
-                ctx.shadowColor = 'rgba(110, 130, 255, 0.6)';
+                ctx.shadowColor = 'rgba(255, 45, 26, 0.5)';
                 ctx.shadowBlur = 26;
-                ctx.strokeStyle = 'rgba(120, 140, 255, 0.30)';
+                ctx.strokeStyle = 'rgba(255, 70, 50, 0.22)';
                 ctx.lineWidth = this.trackWidth + 26;
                 trace(); ctx.stroke();
                 ctx.restore();
 
                 // asphalt
                 const ag = ctx.createLinearGradient(0, 0, W, H);
-                ag.addColorStop(0, '#333a4f');
-                ag.addColorStop(1, '#242a3c');
+                ag.addColorStop(0, '#32333b');
+                ag.addColorStop(1, '#212127');
                 ctx.strokeStyle = ag;
                 ctx.lineWidth = this.trackWidth;
                 trace(); ctx.stroke();
@@ -1693,7 +1715,7 @@
                     div.className = 'countdown';
                     div.textContent = lights[i];
                     const last = i === lights.length - 1;
-                    div.style.color = last ? '#4ade80' : '#f87171';
+                    div.style.color = last ? '#39e079' : '#ff1801';
                     div.style.textShadow = '0 0 ' + (last ? 60 : 40) + 'px currentColor';
                     container.appendChild(div);
                     i++;
@@ -1953,7 +1975,7 @@
         const ambientCanvas = document.getElementById('ambientCanvas');
         const actx = ambientCanvas.getContext('2d');
         let ambientParticles = [];
-        const AMBIENT_COLORS = ['#667eea', '#f093fb', '#56ccf2', '#4ade80'];
+        const AMBIENT_COLORS = ['#ff1801', '#ff6a3d', '#ffffff', '#22d3ee'];
 
         function initAmbient() {
             ambientCanvas.width = window.innerWidth;
